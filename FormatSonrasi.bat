@@ -18,6 +18,7 @@ reg add HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Hid
 reg add HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced /v LaunchTo /t REG_DWORD /d 1 /f & REM Dozya gezginini Bu bilgisayar olarak başlatır.
 reg add HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced /v HideFileExt /t REG_DWORD /d 0 /f & REM Dosya uzantılarını gösterir.
 reg add HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer /v HideSCAMeetNow /t REG_DWORD /d 1 /f & REM Anında Toplantıyı gizler.
+reg add HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Psched /v NonBestEffortLimit /t REG_DWORD /d 0 /f & REM Network performansını iyileştirir.
 echo Görev çubuğu düzenlendi.
 powercfg.exe /change monitor-timeout-ac 0 & REM Ekran kapanma süresini 0 yapar.
 powercfg.exe /change standby-timeout-ac 0 & REM Uyku modunu kapatır.
