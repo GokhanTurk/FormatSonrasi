@@ -38,7 +38,12 @@ echo Office 2019 kuruluyor...
 setup.exe /configure Office2019ConfigurationX64TR.xml & REM Offici kurulumu.
 echo Kurulum tamamlandi.
 echo Gerekli programlar yükleniyor...
-winget install --id=Zoom.Zoom -e -h --accept-source-agreements --accept-package-agreements && winget install --id=Google.Chrome -e -h && winget install --id=RARLab.WinRAR -e -h && winget install --id=VideoLAN.VLC -e -h && winget install --id=Oracle.JavaRuntimeEnvironment -e -h && winget install --id=Adobe.Acrobat.Reader.64-bit -e -h
+winget install --id=Zoom.Zoom -e -h --accept-source-agreements --accept-package-agreements
+winget install --id=Google.Chrome -e -h
+winget install --id=RARLab.WinRAR -e -h
+winget install --id=VideoLAN.VLC -e -h
+winget install --id=Oracle.JavaRuntimeEnvironment -e -h
+winget install --id=Adobe.Acrobat.Reader.64-bit -e -h
 echo Gereksiz programlar kaldırılıyor...
 winget uninstall Microsoft.SkypeApp_kzf8qxf38zg5c -h
 winget uninstall Microsoft.XboxApp_8wekyb3d8bbwe -h
