@@ -22,6 +22,7 @@ reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Psched /v NonBestEffortL
 reg add "HKEY_CURRENT_USER\Control Panel\Accessibility\StickyKeys" /v Flags /t REG_SZ /d 506 /f & REM Yapışkan tuşları kapatır.
 reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\DataCollection" /v "Allow Telemetry" /d 0 /f & REM Telemetry kapatır.
 reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft" /v LetAppsRunInBackground /t REG_DWORD /d 0 /f & REM Arka plan uygulamalarını kapatır.
+reg add "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\BackgroundAccessApplication" /v "GlobalUserDisabled" /t REG_DWORD /d 0 /f & REM Arka plan uygulamalarını kapatır.
 echo Görev çubuğu düzenlendi.
 powercfg.exe /change monitor-timeout-ac 0 & REM Ekran kapanma süresini 0 yapar.
 powercfg.exe /change standby-timeout-ac 0 & REM Uyku modunu kapatır.
