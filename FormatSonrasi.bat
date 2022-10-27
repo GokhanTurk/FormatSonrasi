@@ -20,6 +20,8 @@ reg add "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Ad
 reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer" /v HideSCAMeetNow /t REG_DWORD /d 1 /f & REM Anında Toplantıyı gizler.
 reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Psched /v NonBestEffortLimit" /t REG_DWORD /d 0 /f & REM Network performansını iyileştirir.
 reg add "HKEY_CURRENT_USER\Control Panel\Accessibility\StickyKeys" /v Flags /t REG_SZ /d 506 /f & REM Yapışkan tuşları kapatır.
+reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\DataCollection" /v "Allow Telemetry" /d 0 /f & REM Telemetry kapatır.
+reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft" /v LetAppsRunInBackground /t REG_DWORD /d 0 /f & REM Arka plan uygulamalarını kapatır.
 echo Görev çubuğu düzenlendi.
 powercfg.exe /change monitor-timeout-ac 0 & REM Ekran kapanma süresini 0 yapar.
 powercfg.exe /change standby-timeout-ac 0 & REM Uyku modunu kapatır.
