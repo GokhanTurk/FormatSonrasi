@@ -3,10 +3,10 @@ chcp 65001 & REM Türkçe karakterlerin düzgün çalışması için.
 color b & REM Renklendirme
 cls & REM Ekranı temizler.
 net session > nul 2>&1 & REM Yönetici olarak çalıştırma kontrolü. 
-if %errorlevel% == 2 goto :EXIT else goto START:
+if %errorlevel% == 2 (goto :EXIT) else (goto START:)
 :START
 winget > nul 2>&1 & REM Winget yüklü mü kontrolü.
-if not %errorlevel% == 0 goto :EXIT2 else goto :formatsonrasi
+if not %errorlevel% == 0 (goto :EXIT2) else (goto :formatsonrasi)
 :formatsonrasi
 reg add "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /t REG_DWORD /v ShowTaskViewButton /d 0 /f & REM Görev görünüm düğmesini gizler.
 reg add "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /t REG_DWORD /v ShowCortanaButton /d 0 /f & REM Cortanayı gizler.
@@ -28,21 +28,20 @@ echo Görev çubuğu düzenlendi.
 powercfg.exe /change monitor-timeout-ac 0 & REM Ekran kapanma süresini 0 yapar.
 powercfg.exe /change standby-timeout-ac 0 & REM Uyku modunu kapatır.
 echo Uyku ve ekran kapanması kapatıldı.
-taskkill /f /im explorer.exe & REM Değişikliklerin görünmesi için explorerı kapatır.
-start explorer.exe & REM Explorerı başlatır.
 sc config "dot3svc" start= auto & REM Kablolu kimlik doğrulama servisini otomatik açar.
 sc config "WlanSvc" start= auto & REM Kablosuz kimlik doğrulama servisini otomatik açar.
 echo Kimlik doğrulama hizmetleri açıldı.
 echo Office 2019 Kurulumu...
-echo Dosyalar kopyalaniyor...
+echo Dosyalar kopyalanıyor...
 :OFFICE
 robocopy "\\10.0.11.100\paylas\1 Masaüstü Bilgisayar Win 10 Programları\OFFICE 2019 ORJINAL - WINDOWS" "%userprofile%\Desktop\Office_2019" /E /j /ndl /njh 2>&1 & REM Ağdan Office klasörünü kopyalar.
-if not %errorlevel% == 0 goto :LOGIN2 & REM Office kopyalamak için kaynağa ulaşamazsa login fonksiyonuna yönlendirir.
-echo Dosyalar kopyalandi. Kurulum baslatiliyor...
-cd "%userprofile%\Desktop\Office_2019" || @echo yol bulunamadi. && pause & REM Office kurulumu için klasörün içine girer.
+if %errorlevel% geq 2 (goto :LOGIN2) else (echo Dosyalar kopyalandı. Kurulum başlatılıyor...) & REM Office kopyalamak için kaynağa ulaşamazsa login fonksiyonuna yönlendirir.
+cd "%userprofile%\Desktop\Office_2019" || @echo yol bulunamadı. && pause & REM Office kurulumu için klasörün içine girer.
 echo Office 2019 kuruluyor...
-setup.exe /configure Office2019ConfigurationX64TR.xml & REM Offici kurulumu.
-echo Kurulum tamamlandi.
+setup.exe /configure Office2019ConfigurationX64TR.xml & REM Office kurulumu.
+taskkill /f /im explorer.exe >nul & REM Değişikliklerin görünmesi için explorerı kapatır.
+start explorer.exe & REM Explorerı başlatır.
+echo Kurulum tamamlandı.
 echo Gerekli programlar yükleniyor...
 winget install --id=Zoom.Zoom -e -h --accept-source-agreements --accept-package-agreements
 winget install --id=Google.Chrome -e -h
@@ -81,7 +80,7 @@ exit
 :EXIT2
 Echo winget kuruluyor...
 powershell -executionpolicy bypass -file "\\10.0.11.100\paylas\GokhanTurk\BAT\Powershell\WingetInstall.ps1" > nul 2>&1 & REM winget kurulumu yapan ps scripti çalıştırır.
-if %errorlevel% == 0 goto :formatsonrasi else goto :LOGIN
+if %errorlevel% == 0 (goto :formatsonrasi) else (goto :LOGIN)
 :LOGIN
 echo --------------------------------------------------------------------------------------------------
 echo !!\\\\\\\\\\\\\----------- WINGET KURULUMU İÇİN SUNUCUDA OTURUM AÇINIZ -----------//////////////!!
