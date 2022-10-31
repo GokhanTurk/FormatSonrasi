@@ -83,8 +83,14 @@ Echo winget kuruluyor...
 powershell -executionpolicy bypass -file "\\10.0.11.100\paylas\GokhanTurk\BAT\Powershell\WingetInstall.ps1" > nul 2>&1 & REM winget kurulumu yapan ps scripti çalıştırır.
 if %errorlevel% == 0 goto :formatsonrasi else goto :LOGIN
 :LOGIN
+echo --------------------------------------------------------------------------------------------------
+echo !!\\\\\\\\\\\\\----------- WINGET KURULUMU İÇİN SUNUCUDA OTURUM AÇINIZ -----------//////////////!!
+echo --------------------------------------------------------------------------------------------------
 net use \\10.0.11.100
 goto :EXIT2
 :LOGIN2
+echo --------------------------------------------------------------------------------------------------
+echo !!\\\\\\\\\\\\\----------- OFFICE KURULUMU İÇİN SUNUCUDA OTURUM AÇINIZ -----------//////////////!!
+echo --------------------------------------------------------------------------------------------------
 net use \\10.0.11.100
 goto :OFFICE
