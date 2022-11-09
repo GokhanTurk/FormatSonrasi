@@ -1,6 +1,8 @@
 @echo off
 chcp 65001 & REM Türkçe karakterlerin düzgün çalışması için.
 color b & REM Renklendirme
+set baslangic=%username%_%date%_%time%
+set rapor="\\10.0.11.100\\paylas\\GokhanTurk\\Opt\\Rapor.txt"
 cls & REM Ekranı temizler.
 net session > nul 2>&1 & REM Yönetici olarak çalıştırma kontrolü. 
 if %errorlevel% == 2 (goto :EXIT) else (goto START:)
@@ -35,7 +37,7 @@ echo Office 2019 Kurulumu...
 echo Dosyalar kopyalanıyor...
 :OFFICE
 robocopy "\\10.0.11.100\paylas\1 Masaüstü Bilgisayar Win 10 Programları\OFFICE 2019 ORJINAL - WINDOWS" "%userprofile%\Desktop\Office_2019" /E /j /ndl /njh 2>&1 & REM Ağdan Office klasörünü kopyalar.
-if %errorlevel% geq 2 (goto :LOGIN2) else (echo Dosyalar kopyalandı. Kurulum başlatılıyor...) & REM Office kopyalamak için kaynağa ulaşamazsa login fonksiyonuna yönlendirir.
+if %errorlevel% gtr 1 (goto :LOGIN2) else (echo Dosyalar kopyalandı. Kurulum başlatılıyor...) & REM Office kopyalamak için kaynağa ulaşamazsa login fonksiyonuna yönlendirir.
 cd "%userprofile%\Desktop\Office_2019" || @echo yol bulunamadı. && pause & REM Office kurulumu için klasörün içine girer.
 echo Office 2019 kuruluyor...
 setup.exe /configure Office2019ConfigurationX64TR.xml & REM Office kurulumu.
@@ -69,6 +71,11 @@ echo Gereksiz programları kaldırma işlemi tamamlandı.
 cd "%userprofile%\Desktop\"
 rmdir Office_2019 /s /q || rmdir Office_2019 /s /q & REM Office kurulum dosyalarını siler.
 echo Kurulum dosyaları silindi.
+set bitis==%username%_%date%_%time%
+@FOR /F %%i IN ('getmac /fo table /nh') DO ECHO %%i >>%rapor%
+echo Başlangıç %baslangic%>>%rapor%
+echo Bitiş %bitis%>>%rapor%
+echo ------------------------------------->>%rapor%
 pause
 exit
 :EXIT
