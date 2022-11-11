@@ -71,7 +71,7 @@ echo Gereksiz programları kaldırma işlemi tamamlandı.
 cd "%userprofile%\Desktop\"
 rmdir Office_2019 /s /q || rmdir Office_2019 /s /q & REM Office kurulum dosyalarını siler.
 echo Kurulum dosyaları silindi.
-set bitis==%username%_%date%_%time%
+set bitis=%username%_%date%_%time%
 @FOR /F %%i IN ('getmac /fo table /nh') DO ECHO %%i >>%rapor%
 echo Başlangıç %baslangic%>>%rapor%
 echo Bitiş %bitis%>>%rapor%
