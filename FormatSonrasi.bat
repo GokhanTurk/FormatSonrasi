@@ -46,11 +46,17 @@ start explorer.exe & REM Explorerı başlatır.
 echo Kurulum tamamlandı.
 echo Gerekli programlar yükleniyor...
 winget install --id=Zoom.Zoom -e -h --accept-source-agreements --accept-package-agreements
+if %ERRORLEVEL% EQU 0 (Set Zoom=Zoom başarıyla kuruldu!) Else (Set Zoom=Zoom kurulamadı!)
 winget install --id=Google.Chrome -e -h
+if %ERRORLEVEL% EQU 0 (Set Chrome=Chrome başarıyla kuruldu!) Else (Set Chrome=Chrome kurulamadı!)
 winget install --id=RARLab.WinRAR -e -h
+if %ERRORLEVEL% EQU 0 (Set Winrar=WinRAR başarıyla kuruldu!) Else (Set Winrar=WinRAR kurulamadı!)
 winget install --id=VideoLAN.VLC -e -h
+if %ERRORLEVEL% EQU 0 (Set VLC=VLC başarıyla kuruldu!) Else (Set VLC=VLC kurulamadı!)
 winget install --id=Oracle.JavaRuntimeEnvironment -e -h
+if %ERRORLEVEL% EQU 0 (Set Java=Java başarıyla kuruldu!) Else (Set Java=Java kurulamadı!)
 winget install --id=Adobe.Acrobat.Reader.64-bit -e -h
+if %ERRORLEVEL% EQU 0 (Set Acro=Acrobat Reader başarıyla kuruldu!) Else (Set Acro=Acrobat Reader kurulamadı!)
 echo Gereksiz programlar kaldırılıyor...
 winget uninstall Microsoft.SkypeApp_kzf8qxf38zg5c -h
 winget uninstall Microsoft.XboxApp_8wekyb3d8bbwe -h
@@ -68,6 +74,13 @@ winget uninstall Microsoft.BingSports_8wekyb3d8bbwe -h
 winget uninstall Microsoft.People_8wekyb3d8bbwe -h
 winget uninstall Disney.37853FC22B2CE_6rarf9sa4v8jt -h
 echo Gereksiz programları kaldırma işlemi tamamlandı.
+echo -----------------------------------------------------
+echo %Zoom%
+echo %Chrome%
+echo %Winrar%
+echo %VLC%
+echo %Java%
+echo %Acro%
 cd "%userprofile%\Desktop\"
 rmdir Office_2019 /s /q || rmdir Office_2019 /s /q & REM Office kurulum dosyalarını siler.
 echo Kurulum dosyaları silindi.
