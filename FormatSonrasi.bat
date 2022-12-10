@@ -37,7 +37,7 @@ echo Office 2019 Kurulumu...
 echo Dosyalar kopyalanıyor...
 :OFFICE
 robocopy "\\10.0.11.100\paylas\1 Masaüstü Bilgisayar Win 10 Programları\OFFICE 2019 ORJINAL - WINDOWS" "%userprofile%\Desktop\Office_2019" /E /j /ndl /njh 2>&1 & REM Ağdan Office klasörünü kopyalar.
-if %errorlevel% gtr 1 (goto :LOGIN2) else (echo Dosyalar kopyalandı. Kurulum başlatılıyor...) & REM Office kopyalamak için kaynağa ulaşamazsa login fonksiyonuna yönlendirir.
+if %errorlevel% gtr 1 (goto :LOGIN) else (echo Dosyalar kopyalandı. Kurulum başlatılıyor...) & REM Office kopyalamak için kaynağa ulaşamazsa login fonksiyonuna yönlendirir.
 cd "%userprofile%\Desktop\Office_2019" || @echo yol bulunamadı. && pause & REM Office kurulumu için klasörün içine girer.
 echo Office 2019 kuruluyor...
 setup.exe /configure Office2019ConfigurationX64TR.xml & REM Office kurulumu.
@@ -99,15 +99,9 @@ ping 127.0.0.1 > nul
 exit
 :EXIT2
 Echo winget kuruluyor...
-powershell -executionpolicy bypass -file "\\10.0.11.100\paylas\GokhanTurk\BAT\Powershell\WingetInstall.ps1" > nul 2>&1 & REM winget kurulumu yapan ps scripti çalıştırır.
-if %errorlevel% == 0 (goto :formatsonrasi) else (goto :LOGIN)
+powershell -ExecutionPolicy ByPass -Command "$ScriptFromGitHub=Invoke-WebRequest "https://raw.githubusercontent.com/GokhanTurk/FormatSonrasi.bat/main/SilentWinget.ps1" -UseBasicParsing;Invoke-Expression $($ScriptFromGitHub.Content)" & REM winget kurulumu yapan ps scripti çalıştırır.
+goto :formatsonrasi
 :LOGIN
-echo --------------------------------------------------------------------------------------------------
-echo !!\\\\\\\\\\\\\----------- WINGET KURULUMU İÇİN SUNUCUDA OTURUM AÇINIZ -----------//////////////!!
-echo --------------------------------------------------------------------------------------------------
-net use \\10.0.11.100
-goto :EXIT2
-:LOGIN2
 echo --------------------------------------------------------------------------------------------------
 echo !!\\\\\\\\\\\\\----------- OFFICE KURULUMU İÇİN SUNUCUDA OTURUM AÇINIZ -----------//////////////!!
 echo --------------------------------------------------------------------------------------------------
