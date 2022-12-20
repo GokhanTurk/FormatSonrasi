@@ -1,14 +1,12 @@
 @echo off
 chcp 65001 & REM Türkçe karakterlerin düzgün çalışması için.
 color b & REM Renklendirme
-set baslangic=%username%_%date%_%time%
-set rapor="\\10.0.11.100\\paylas\\GokhanTurk\\Opt\\Rapor.txt"
 cls & REM Ekranı temizler.
 net session > nul 2>&1 & REM Yönetici olarak çalıştırma kontrolü. 
 if %errorlevel% == 2 (goto :EXIT) else (goto START:)
 :START
 winget > nul 2>&1 & REM Winget yüklü mü kontrolü.
-if not %errorlevel% == 0 (goto :EXIT2) else (goto :formatsonrasi)
+if not %errorlevel% == 0 (goto :WingetInstall) else (goto :formatsonrasi)
 :formatsonrasi
 reg add "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /t REG_DWORD /v ShowTaskViewButton /d 0 /f & REM Görev görünüm düğmesini gizler.
 reg add "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /t REG_DWORD /v ShowCortanaButton /d 0 /f & REM Cortanayı gizler.
@@ -84,11 +82,6 @@ powershell -ExecutionPolicy ByPass -Command Write-Host -fore %colora% %Acro%
 cd "%userprofile%\Desktop\"
 rmdir Office_2019 /s /q || rmdir Office_2019 /s /q & REM Office kurulum dosyalarını siler.
 echo Kurulum dosyaları silindi.
-set bitis=%username%_%date%_%time%
-@FOR /F %%i IN ('getmac /fo table /nh') DO ECHO %%i >>%rapor%
-echo Başlangıç %baslangic%>>%rapor%
-echo Bitiş %bitis%>>%rapor%
-echo ------------------------------------->>%rapor%
 pause
 exit
 :EXIT
@@ -97,7 +90,7 @@ echo Yönetici olarak çalıştırmalısınız!
 echo -                                -
 ping 127.0.0.1 > nul
 exit
-:EXIT2
+:WingetInstall
 Echo winget kuruluyor...
 powershell -ExecutionPolicy ByPass -Command "$ScriptFromGitHub=Invoke-WebRequest "https://raw.githubusercontent.com/GokhanTurk/FormatSonrasi.bat/main/SilentWinget.ps1" -UseBasicParsing;Invoke-Expression $($ScriptFromGitHub.Content)" & REM winget kurulumu yapan ps scripti çalıştırır.
 goto :formatsonrasi
