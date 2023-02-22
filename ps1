@@ -5,6 +5,7 @@ $isAdmin = ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIde
 if (-not $isAdmin) {
     $script = (irm "https://raw.githubusercontent.com/GokhanTurk/FormatSonrasi/main/ps1").Content
     Start-Process powershell.exe "-NoProfile -ExecutionPolicy Bypass -Command `"& {Start-Process powershell.exe -ArgumentList '-NoProfile -ExecutionPolicy Bypass', '-Command', $script -Verb RunAs}`"" -Verb RunAs
+    exit
 }
 
 Rename-Computer qComp
