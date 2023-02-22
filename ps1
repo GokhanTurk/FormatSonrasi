@@ -6,6 +6,9 @@ if (-not $isAdmin) {
     $script = (irm "https://raw.githubusercontent.com/GokhanTurk/FormatSonrasi/main/ps1").Content
     Start-Process powershell.exe "-NoProfile -ExecutionPolicy Bypass -Command `"& {Start-Process powershell.exe -ArgumentList '-NoProfile -ExecutionPolicy Bypass', '-Command', $script -Verb RunAs}`"" -Verb RunAs
 }
+
+Rename-Computer qComp
+
 # Create a function to check if a program is installed
 function Check-Program {
     param(
