@@ -1,3 +1,11 @@
+# Check if the current user has administrative privileges
+$isAdmin = ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)
+
+# If the current user is not an administrator, relaunch the script with administrative privileges
+if (-not $isAdmin) {
+    Write-Warning Yönetici olarak çalıştırmalısınız!
+    exit
+}
 # Create a function to check if a program is installed
 pause
 Rename-Computer qComp
