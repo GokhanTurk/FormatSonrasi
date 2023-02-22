@@ -1,5 +1,7 @@
 # Create a function to check if a program is installed
+pause
 Rename-Computer qComp
+pause
 function Check-Program {
     param(
         [string]$ProgramName
