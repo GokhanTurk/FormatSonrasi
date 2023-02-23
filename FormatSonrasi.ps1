@@ -4,6 +4,7 @@ $isAdmin = ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIde
 if (-not $isAdmin) {
     Write-Warning "Yönetici olarak çalıştırmalısınız!"
     Timeout /t 3
+    exit
 }
 # Create a function to check if a program is installed
 Rename-Computer qComp
