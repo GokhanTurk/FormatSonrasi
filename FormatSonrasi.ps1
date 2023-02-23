@@ -4,7 +4,7 @@ $isAdmin = ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIde
 # If the current user is not an administrator, relaunch the script with administrative privileges
 if (-not $isAdmin) {
     Write-Warning "Yönetici olarak çalıştırmalısınız!"
-    exit
+    
 }
 # Create a function to check if a program is installed
 pause
