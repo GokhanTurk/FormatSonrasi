@@ -1,8 +1,9 @@
 # Check if the current user has administrative privileges
 $isAdmin = ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)
-
+pause
 # If the current user is not an administrator, relaunch the script with administrative privileges
 if (-not $isAdmin) {
+pause
     Write-Warning "Yönetici olarak çalıştırmalısınız!"
     
 }
