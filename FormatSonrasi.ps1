@@ -6,7 +6,7 @@ pause
 if (-not $isAdmin) {
 pause
     Write-Warning "Yönetici olarak çalıştırmalısınız!"
-    
+    Timeout /t 3
 }
 # Create a function to check if a program is installed
 pause
