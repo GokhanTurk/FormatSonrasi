@@ -24,3 +24,4 @@ Set-ItemProperty -Path "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft" -Name 'L
 Set-ItemProperty -Path "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\BackgroundAccessApplications" -Name 'GlobalUserDisabled' -Type DWord -Value 1
 Set-ItemProperty -Path 'Registry::HKU\.DEFAULT\Control Panel\Keyboard' -Name "InitialKeyboardIndicators" -Type String -Value "2"
 pause
+exit
