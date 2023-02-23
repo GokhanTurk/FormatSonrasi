@@ -1,17 +1,12 @@
 # Check if the current user has administrative privileges
-pause
 $isAdmin = ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)
-pause
 # If the current user is not an administrator, relaunch the script with administrative privileges
 if (-not $isAdmin) {
-pause
     Write-Warning "Yönetici olarak çalıştırmalısınız!"
     Timeout /t 3
 }
 # Create a function to check if a program is installed
-pause
 Rename-Computer qComp
-pause
 function Check-Program {
     param(
         [string]$ProgramName
