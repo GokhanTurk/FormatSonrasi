@@ -61,6 +61,6 @@ Remove-Item vlc*
 Remove-Item Adob*
 cd "$env:userprofile\Desktop\"
 Remove-Item "Microsoft Edge.lnk"
-Remove-Item Office_2019
+Remove-Item Office_2019 -Force -Recurse
 pause
 exit
