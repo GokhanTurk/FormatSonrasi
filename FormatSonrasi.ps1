@@ -5,24 +5,36 @@ if (Test-Path ~\AppData\Local\Microsoft\WindowsApps\winget.exe) {
 else {
     irm https://raw.githubusercontent.com/GokhanTurk/FormatSonrasi.bat/main/SilentWinget.ps1 | iex
 }
-New-ItemProperty -Path 'Registry::HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced' -Name 'ShowTaskViewButton' -Type DWord -Value 0
-Set-ItemProperty -Path 'Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced' -Name 'ShowCortanaButton' -Value 0
-Set-ItemProperty -Path 'Registry::HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced' -Name 'ShowCortanaButton' -Value 0
-New-ItemProperty -Path 'Registry::HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Search' -Name 'SearchboxTaskbarMode' -Type DWord -Value 1
-Set-ItemProperty -Path 'Registry::HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Feeds' -Name 'ShellFeedsTaskbarOpenOnHover' -Value 0
-Set-ItemProperty -Path 'Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\HideDesktopIcons\NewStartPanel' -Name '{20D04FE0-3AEA-1069-A2D8-08002B30309D}' -Value 0
-Set-ItemProperty -Path 'Registry::HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Explorer\HideDesktopIcons\NewStartPanel' -Name '{59031a47-3f72-44a7-89c5-5595fe6b30ee}' -Value 0
-New-ItemProperty -Path 'Registry::HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Explorer\HideDesktopIcons\ClassicStartMenu' -Name '{59031a47-3f72-44a7-89c5-5595fe6b30ee}' -Type DWord -Value 0
-New-ItemProperty -Path 'Registry::HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced' -Name 'LaunchTo' -Type DWord -Value 1
-Set-ItemProperty -Path 'Registry::HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced' -Name 'HideFileExt' -Value 0
-New-ItemProperty -Path 'Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer' -Name 'HideSCAMeetNow' -Type DWord -Value 1
-Set-ItemProperty -Path 'Registry::HKEY_CURRENT_USER\Control Panel\Accessibility\StickyKeys' -Name 'Flags' -Value '506'
-Set-ItemProperty -Path 'Registry::HKEY_CURRENT_USER\Control Panel\Accessibility\ToggleKeys' -Name 'Flags' -Value '58'
-Set-ItemProperty -Path 'Registry::HKEY_CURRENT_USER\Control Panel\Accessibility\Keyboard Response' -Name 'Flags' -Value '122'
-New-ItemProperty -Path 'Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\DataCollection' -Name 'Allow Telemetry' -Type DWord -Value 0
-New-ItemProperty -Path 'Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft' -Name 'LetAppsRunInBackground' -Type DWord -Value 0
-New-ItemProperty -Path 'Registry::HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\BackgroundAccessApplications' -Name 'GlobalUserDisabled' -Type DWord -Value 1
-Set-ItemProperty -Path 'Registry::HKEY_USERS\.DEFAULT\Control Panel\Keyboard' -Name 'InitialKeyboardIndicators' -Value 2
+function Change-Registry {
+    [CmdletBinding()] Param([string]$registryPath, [string]$registryName, [string]$registryValue)
+    # Check if registry value exists
+    if (!(Test-Path $registryPath) -or !(Get-Item -Path $registryPath).GetValue($registryName) -ne $null) {
+        New-ItemProperty -Path $registryPath -Name $registryName -Type DWord -Value $registryValue -ErrorAction SilentlyContinue
+    }
+
+    # Set registry value
+    Set-ItemProperty -Path $registryPath -Name $registryName -Value $registryValue
+}
+
+Change-Registry -registryPath 'Registry::HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced' -registryName 'ShowTaskViewButton' -registryValue 0
+Change-Registry -registryPath 'Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced' -registryName 'ShowCortanaButton' -registryValue 0
+Change-Registry -registryPath 'Registry::HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced' -registryName 'ShowCortanaButton' -registryValue 0
+Change-Registry -registryPath 'Registry::HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Search' -registryName 'SearchboxTaskbarMode' -registryValue 1
+Change-Registry -registryPath 'Registry::HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Feeds' -registryName 'ShellFeedsTaskbarOpenOnHover' -registryValue 0
+Change-Registry -registryPath 'Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\HideDesktopIcons\NewStartPanel' -registryName '{20D04FE0-3AEA-1069-A2D8-08002B30309D}' -registryValue 0
+Change-Registry -registryPath 'Registry::HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Explorer\HideDesktopIcons\NewStartPanel' -registryName '{59031a47-3f72-44a7-89c5-5595fe6b30ee}' -registryValue 0
+Change-Registry -registryPath 'Registry::HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Explorer\HideDesktopIcons\ClassicStartMenu' -registryName '{59031a47-3f72-44a7-89c5-5595fe6b30ee}' -registryValue 0
+Change-Registry -registryPath 'Registry::HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced' -registryName 'LaunchTo' -registryValue 1
+Change-Registry -registryPath 'Registry::HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced' -registryName 'HideFileExt' -registryValue 0
+Change-Registry -registryPath 'Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer' -registryName 'HideSCAMeetNow' -registryValue 1
+Change-Registry -registryPath 'Registry::HKEY_CURRENT_USER\Control Panel\Accessibility\StickyKeys' -registryName 'Flags' -registryValue '506'
+Change-Registry -registryPath 'Registry::HKEY_CURRENT_USER\Control Panel\Accessibility\ToggleKeys' -registryName 'Flags' -registryValue '58'
+Change-Registry -registryPath 'Registry::HKEY_CURRENT_USER\Control Panel\Accessibility\Keyboard Response' -registryName 'Flags' -registryValue '122'
+Change-Registry -registryPath 'Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\DataCollection' -registryName 'Allow Telemetry' -registryValue 0
+Change-Registry -registryPath 'Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft' -registryName 'LetAppsRunInBackground' -registryValue 0
+Change-Registry -registryPath 'Registry::HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\BackgroundAccessApplications' -registryName 'GlobalUserDisabled' -registryValue 1
+Change-Registry -registryPath 'Registry::HKEY_USERS\.DEFAULT\Control Panel\Keyboard' -registryName 'InitialKeyboardIndicators' -registryValue 2
+
 powercfg.exe /change monitor-timeout-ac 0
 powercfg.exe /change standby-timeout-ac 0
 Set-Service -Name "dot3svc" -StartupType Automatic
@@ -57,10 +69,10 @@ winget uninstall Microsoft.People_8wekyb3d8bbwe -h
 winget uninstall Disney.37853FC22B2CE_6rarf9sa4v8jt -h
 irm https://raw.githubusercontent.com/GokhanTurk/CreateShortcut.ps1/Multiple2/shortcut.ps1 | iex
 cd "C:\Users\Public\Desktop\"
-Remove-Item vlc*
-Remove-Item Adob*
+Remove-Item vlc* -ErrorAction SilentlyContinue
+Remove-Item Adob* -ErrorAction SilentlyContinue
 cd "$env:userprofile\Desktop\"
-Remove-Item "Microsoft Edge.lnk"
-Remove-Item Office_2019 -Force -Recurse
+Remove-Item "Microsoft Edge.lnk" -ErrorAction SilentlyContinue
+Remove-Item Office_2019 -Force -Recurse -ErrorAction SilentlyContinue
 pause
 exit
