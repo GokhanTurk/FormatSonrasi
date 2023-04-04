@@ -15,7 +15,7 @@ function Change-Registry {
     # Set registry value
     Set-ItemProperty -Path $registryPath -Name $registryName -Value $registryValue
 }
-
+Enable-ComputerRestore -Drive "C:"
 Change-Registry -registryPath 'Registry::HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced' -registryName 'ShowTaskViewButton' -registryValue 0
 Change-Registry -registryPath 'Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced' -registryName 'ShowCortanaButton' -registryValue 0
 Change-Registry -registryPath 'Registry::HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced' -registryName 'ShowCortanaButton' -registryValue 0
