@@ -56,7 +56,6 @@ winget uninstall Microsoft.SkypeApp_kzf8qxf38zg5c -h
 winget uninstall Microsoft.XboxApp_8wekyb3d8bbwe -h
 winget uninstall Microsoft.MicrosoftSolitaireCollection_8wekyb3d8bbwe -h
 winget uninstall Microsoft.MixedReality.Portal_8wekyb3d8bbwe -h
-winget uninstall Microsoft.SkypeApp_kzf8qxf38zg5c -h
 winget uninstall SpotifyAB.SpotifyMusic_zpdnekdrzrea0 -h
 winget uninstall Microsoft.XboxGamingOverlay_8wekyb3d8bbwe -h
 winget uninstall Microsoft.YourPhone_8wekyb3d8bbwe -h
@@ -67,6 +66,12 @@ winget uninstall Microsoft.BingFinance_8wekyb3d8bbwe -h
 winget uninstall Microsoft.BingSports_8wekyb3d8bbwe -h
 winget uninstall Microsoft.People_8wekyb3d8bbwe -h
 winget uninstall Disney.37853FC22B2CE_6rarf9sa4v8jt -h
+winget uninstall Microsoft.GetHelp_8wekyb3d8bbwe -h
+winget uninstall Microsoft.Getstarted_8wekyb3d8bbwe -h
+winget uninstall Microsoft.Wallet_8wekyb3d8bbwe -h
+winget uninstall Microsoft.Office.OneNote_8wekyb3d8bbwe -h
+winget uninstall Microsoft.WindowsFeedbackHub_8wekyb3d8bbwe -h
+winget uninstall Microsoft.MicrosoftOfficeHub_8wekyb3d8bbwe -h
 irm https://raw.githubusercontent.com/GokhanTurk/CreateShortcut.ps1/Multiple2/shortcut.ps1 | iex
 cd "C:\Users\Public\Desktop\"
 Remove-Item vlc* -ErrorAction SilentlyContinue
