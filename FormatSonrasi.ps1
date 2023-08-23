@@ -80,6 +80,5 @@ Remove-Item vlc* -ErrorAction SilentlyContinue
 Remove-Item Adob* -ErrorAction SilentlyContinue
 cd "$env:userprofile\Desktop\"
 Remove-Item "Microsoft Edge.lnk" -ErrorAction SilentlyContinue
-Remove-Item Office_2019 -Force -Recurse -ErrorAction SilentlyContinue
 pause
 exit
