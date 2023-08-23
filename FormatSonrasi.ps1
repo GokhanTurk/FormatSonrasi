@@ -46,10 +46,6 @@ Set-Service -Name "dot3svc" -StartupType Automatic
 Set-Service -Name "WlanSvc" -StartupType Automatic
 taskkill /f /im explorer.exe
 start explorer.exe
-net use \\10.2.11.25 /user:bat 5Tgbnhy6
-robocopy "\\10.2.11.25\Programlar\OFFICE-2019-ORJINAL-WINDOWS" "$env:userprofile\Desktop\Office_2019" /E /j /ndl /njh /R:0 /W:0
-cd "$env:userprofile\Desktop\Office_2019"
-.\setup.exe /configure Office2019ConfigurationX64TR.xml
 winget install winget --accept-source-agreements --accept-package-agreements
 winget install --id=Zoom.Zoom -e -h --scope machine --accept-source-agreements --accept-package-agreements
 winget install --id=Microsoft.Teams -e -h --scope machine
