@@ -6,3 +6,10 @@ Batch script for install standard programs, customize desktop and remove bloatwa
 irm https://raw.githubusercontent.com/GokhanTurk/FormatSonrasi/main/FormatSonrasi.ps1 | iex
 
 ```
+Or shortly
+
+```Powershell
+
+irm gokhanturk.com/fs | iex
+
+```
